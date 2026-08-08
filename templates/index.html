@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quizora — Modern Quiz Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/styles.css?v=9">
+  <script>(function () { try { var t = localStorage.getItem('quizora-theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) { } })();</script>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+</head>
+
+<body>
+
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <button class="logo" data-nav="home">
+        <span class="logo-mark">Q</span>
+        <span class="logo-text">Quizora</span>
+      </button>
+      <nav class="header-nav">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Switch to light mode"
+          title="Toggle dark / light mode">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2" />
+            <path d="M12 20v2" />
+            <path d="m4.93 4.93 1.41 1.41" />
+            <path d="m17.66 17.66 1.41 1.41" />
+            <path d="M2 12h2" />
+            <path d="M20 12h2" />
+            <path d="m6.34 17.66-1.41 1.41" />
+            <path d="m19.07 4.93-1.41 1.41" />
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+          </svg>
+        </button>
+        <div class="nav-dropdown" id="categories-dropdown">
+          <button class="nav-link" id="categories-trigger" aria-haspopup="true" aria-expanded="false">
+            <span>Categories</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <div id="categories-menu" class="dropdown-menu hidden">
+            <a class="dropdown-item" href="/">
+              <span class="dropdown-emoji">🧭</span>
+              <span class="dropdown-name">All categories</span>
+              <span class="dropdown-count" data-count="all">—</span>
+            </a>
+            <div class="dropdown-divider"></div>
+          </div>
+        </div>
+        <a class="nav-link" href="/admin/">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="app" class="container">
+
+    <section id="view-home" class="view">
+      <div class="hero">
+        <p class="hero-eyebrow reveal">🧠 Challenge your brain</p>
+        <h1 class="hero-title reveal">Test your knowledge.<br><span class="gradient-text">Prove your brilliance.</span>
+        </h1>
+        <p class="hero-subtitle reveal">Dive into hand-crafted quizzes across science, history and nature. Every answer
+          sharpens your mind.</p>
+        <div class="hero-cta reveal">
+          <button class="btn btn-primary btn-lg" data-action="scroll-trending">Explore quizzes <span>↓</span></button>
+        </div>
+      </div>
+
+      <section id="trending" class="home-section">
+        <div class="section-head reveal">
+          <h2 class="section-title"><span class="gradient-text">🔥 Trending quizzes</span></h2>
+          <p class="section-sub reveal">The most played quizzes right now.</p>
+        </div>
+        <div id="trending-grid" class="trending-grid">
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+        </div>
+      </section>
+
+      <section id="featured" class="home-section">
+        <div class="section-head reveal">
+          <h2 class="section-title"><span class="gradient-text">📚 Browse by category</span></h2>
+          <p class="section-sub reveal">Pick a topic and start exploring.</p>
+        </div>
+        <div id="featured-categories"></div>
+      </section>
+
+      <section id="contact" class="contact-section">
+        <div class="section-head reveal">
+          <h2 class="section-title"><span class="gradient-text">Get In Touch</span></h2>
+          <p class="section-sub reveal">Have a question or an idea? Say hello.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info reveal">
+            <h3 class="contact-heading">Let's build something great together.</h3>
+            <p class="contact-blurb">I'm always interested in hearing about new opportunities, interesting projects, or
+              just connecting with fellow developers. Feel free to reach out.</p>
+            <ul class="contact-list">
+              <li>
+                <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="m22 7-10 6L2 7" />
+                  </svg></span>
+                <div>
+                  <span class="contact-label">Email</span>
+                  <a class="contact-value" href="mailto:tasmiulalamshopnil@gmail.com">tasmiulalamshopnil@gmail.com</a>
+                </div>
+              </li>
+              <li>
+                <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg></span>
+                <div>
+                  <span class="contact-label">Location</span>
+                  <span class="contact-value">Bangladesh</span>
+                </div>
+              </li>
+              <li>
+                <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                      d="M12 2C6.48 2 2 6.58 2 12.28c0 4.55 2.9 8.4 6.93 9.76.5.1.68-.22.68-.49 0-.24-.01-.9-.01-1.75-2.82.62-3.42-1.2-3.42-1.2-.46-1.2-1.12-1.52-1.12-1.52-.92-.64.07-.62.07-.62 1.02.07 1.55 1.07 1.55 1.07.9 1.58 2.37 1.12 2.94.86.09-.67.35-1.12.64-1.38-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05a9.4 9.4 0 0 1 2.5-.34c.85 0 1.7.12 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9 0 1.38-.01 2.49-.01 2.83 0 .27.18.6.69.49A10.28 10.28 0 0 0 22 12.28C22 6.58 17.52 2 12 2Z" />
+                  </svg></span>
+                <div>
+                  <span class="contact-label">GitHub</span>
+                  <a class="contact-value" href="https://github.com/tasmiul" target="_blank"
+                    rel="noopener">github.com/tasmiul</a>
+                </div>
+              </li>
+              <li>
+                <span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path
+                      d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z" />
+                  </svg></span>
+                <div>
+                  <span class="contact-label">LinkedIn</span>
+                  <a class="contact-value" href="https://linkedin.com/in/tasmiul" target="_blank"
+                    rel="noopener">linkedin.com/in/tasmiul</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <form id="contact-form" class="contact-form reveal" novalidate>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="contact-name">Name</label>
+                <input id="contact-name" name="name" type="text" placeholder="Your name" autocomplete="name">
+              </div>
+              <div class="form-field">
+                <label for="contact-email">Email</label>
+                <input id="contact-email" name="email" type="email" placeholder="you@example.com" autocomplete="email">
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="contact-subject">Subject</label>
+              <input id="contact-subject" name="subject" type="text" placeholder="What's this about?">
+            </div>
+            <div class="form-field">
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" name="message" rows="5" placeholder="Write your message…"></textarea>
+            </div>
+            <button class="btn btn-primary btn-glow" type="submit">Send Message <span>→</span></button>
+          </form>
+        </div>
+      </section>
+    </section>
+
+    <section id="view-intro" class="view hidden">
+      <button class="back-btn" data-action="go-home"><span>←</span> Back to quizzes</button>
+      <div id="intro-card" class="intro-card"></div>
+    </section>
+
+    <section id="view-play" class="view hidden">
+      <div class="quiz-header">
+        <div class="quiz-header-top">
+          <button class="quit-btn" data-action="quit-quiz" title="Quit quiz"><span>✕</span></button>
+          <div class="quiz-progress-wrap">
+            <div id="progress-bar" class="progress-bar"><span></span></div>
+          </div>
+          <div id="timer-chip" class="timer-chip">
+            <svg class="timer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="13" r="8" />
+              <path d="M12 9v4l2.5 2.5" />
+              <path d="M9 2h6" />
+            </svg>
+            <span id="timer-text">--:--</span>
+          </div>
+        </div>
+        <div class="quiz-meta-row">
+          <span id="play-category" class="play-category"></span>
+          <span id="question-counter" class="question-counter">1 / 5</span>
+        </div>
+      </div>
+
+      <div id="question-card" class="question-card">
+        <div class="question-enter">
+          <p id="question-text" class="question-text"></p>
+        </div>
+        <div id="choices" class="choices"></div>
+        <div id="choice-error" class="choice-error hidden">Please select an answer before continuing.</div>
+      </div>
+
+      <div class="quiz-nav">
+        <button id="prev-btn" class="btn btn-ghost" data-action="prev-question" disabled><span>←</span>
+          Previous</button>
+        <button id="next-btn" class="btn btn-primary" data-action="next-question">Next <span>→</span></button>
+        <button id="submit-btn" class="btn btn-primary btn-glow hidden" data-action="submit-quiz">Submit
+          answers</button>
+      </div>
+    </section>
+
+    <section id="view-results" class="view hidden">
+      <div class="results-card">
+        <div class="results-hero">
+          <div class="score-ring-wrap">
+            <svg class="score-ring" viewBox="0 0 160 160">
+              <defs>
+                <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#8b5cf6" />
+                  <stop offset="100%" stop-color="#22d3ee" />
+                </linearGradient>
+              </defs>
+              <circle class="ring-bg" cx="80" cy="80" r="68" />
+              <circle id="ring-fg" class="ring-fg" cx="80" cy="80" r="68" />
+            </svg>
+            <div class="score-ring-center">
+              <span id="score-value" class="score-value">0%</span>
+              <span id="score-label" class="score-label">SCORE</span>
+            </div>
+          </div>
+          <div class="results-summary">
+            <p id="results-title" class="results-title"></p>
+            <p id="results-message" class="results-message"></p>
+            <div class="stats-row">
+              <div class="stat-box"><span id="stat-correct">0</span><label>Correct</label></div>
+              <div class="stat-box"><span id="stat-wrong">0</span><label>Wrong</label></div>
+              <div class="stat-box"><span id="stat-total">0</span><label>Questions</label></div>
+              <div class="stat-box"><span id="stat-time">--:--</span><label>Time</label></div>
+            </div>
+            <div class="results-actions">
+              <button class="btn btn-primary" data-action="retake"><span>↻</span> Retake quiz</button>
+              <button class="btn btn-ghost" data-action="go-home">Browse more</button>
+            </div>
+          </div>
+        </div>
+        <div id="review-list" class="review-list"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" id="footer">
+    <div class="footer__container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="/" class="footer__logo">
+            <span class="logo-mark">Q</span>
+            <span class="footer__logo-text">Quizora</span>
+          </a>
+          <p class="footer__tagline">Hand-crafted quizzes to test your knowledge and prove your brilliance.</p>
+        </div>
+
+        <div class="footer__links">
+          <div class="footer__links-group">
+            <h4>Navigation</h4>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/#trending">Trending</a></li>
+              <li><a href="/#featured">Categories</a></li>
+              <li><a href="/#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer__links-group">
+            <h4>Connect</h4>
+            <ul>
+              <li><a href="https://github.com/tasmiul" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+              <li><a href="https://linkedin.com/in/tasmiul" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+              <li><a href="mailto:tasmiulalamshopnil@gmail.com">Email</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copyright">&copy; 2026 Tasmiul Alam Shopnil. All rights reserved.</p>
+        <div class="footer__built-with">
+          <span>Built with</span>
+          <span class="footer__tech">Django</span>
+          <span class="footer__tech">Vanilla JS</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="/static/js/app.js?v=8"></script>
+  <script src="/static/js/theme.js?v=1"></script>
+</body>
+
+</html>

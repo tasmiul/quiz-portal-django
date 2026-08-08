@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ category.name }} — Quizora</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/styles.css?v=9">
+  <script>(function(){try{var t=localStorage.getItem('quizora-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+</head>
+<body>
+
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="/">
+        <span class="logo-mark">Q</span>
+        <span class="logo-text">Quizora</span>
+      </a>
+      <nav class="header-nav">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Switch to light mode" title="Toggle dark / light mode">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+        <div class="nav-dropdown" id="categories-dropdown">
+          <button class="nav-link" id="categories-trigger" aria-haspopup="true" aria-expanded="false">
+            <span>Categories</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div id="categories-menu" class="dropdown-menu hidden">
+            <a class="dropdown-item" href="/">
+              <span class="dropdown-emoji">🧭</span>
+              <span class="dropdown-name">All categories</span>
+              <span class="dropdown-count">{{ total_quizzes }}</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            {% for c, count in all_categories %}
+            <a class="dropdown-item{% if c.slug == category.slug %} is-active{% endif %}" href="/category/{{ c.slug }}/">
+              <span class="dropdown-emoji">{{ c.emoji }}</span>
+              <span class="dropdown-name">{{ c.name }}</span>
+              <span class="dropdown-count">{{ count }}</span>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+        <a class="nav-link" href="/admin/">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="category-hero reveal">
+      <div class="category-emoji" style="background:linear-gradient(135deg,{{ category.gradient_from }},{{ category.gradient_to }})">{{ category.emoji }}</div>
+      <p class="category-eyebrow">Category</p>
+      <h1 class="category-title">{{ category.name }}</h1>
+      {% if category.description %}
+      <p class="category-desc">{{ category.description }}</p>
+      {% else %}
+      <p class="category-desc">Explore {{ category.name }} quizzes and test your knowledge.</p>
+      {% endif %}
+      <p class="category-count">{{ page_obj.paginator.count }} quiz{{ page_obj.paginator.count|pluralize }}</p>
+    </section>
+
+    <section id="category-list" class="category-section">
+      <div class="section-head reveal">
+        <h2 class="section-title">All <span class="gradient-text">{{ category.name }}</span> quizzes</h2>
+      </div>
+
+      {% if page_obj.object_list %}
+      <div class="mini-grid category-grid">
+        {% for quiz in page_obj.object_list %}
+        <a class="mini-card reveal" href="/?quiz={{ quiz.id }}" style="--card-f:{{ category.gradient_from }};--card-t:{{ category.gradient_to }}">
+          <div class="mini-top"><span class="difficulty-badge {{ quiz.difficulty }}">{{ quiz.difficulty }}</span></div>
+          <h3 class="mini-title">{{ quiz.title }}</h3>
+          <div class="mini-meta">
+            <span>❓ {{ quiz.questions_count }}</span>
+            <span>⏱ {{ quiz.duration_minutes }} min</span>
+          </div>
+          <span class="btn btn-primary btn-sm start-btn"><span>▶</span> Start quiz</span>
+        </a>
+        {% endfor %}
+      </div>
+
+      {% if is_paginated %}
+      <nav class="pagination reveal" aria-label="Pagination">
+        {% if page_obj.has_previous %}
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}"><span>←</span> Prev</a>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+          {% if num == page_obj.number %}
+          <span class="page-link is-active">{{ num }}</span>
+          {% elif num >= page_obj.number|add:"-2" and num <= page_obj.number|add:"2" %}
+          <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next <span>→</span></a>
+        {% endif %}
+      </nav>
+      {% endif %}
+
+      {% else %}
+      <div class="empty-state">
+        <div class="empty-icon">🔭</div>
+        <h3>No quizzes here yet</h3>
+        <p>Check back soon — new quizzes are added all the time.</p>
+      </div>
+      {% endif %}
+    </section>
+
+  </main>
+
+  <footer class="footer" id="footer">
+    <div class="footer__container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="/" class="footer__logo">
+            <span class="logo-mark">Q</span>
+            <span class="footer__logo-text">Quizora</span>
+          </a>
+          <p class="footer__tagline">Hand-crafted quizzes to test your knowledge and prove your brilliance.</p>
+        </div>
+
+        <div class="footer__links">
+          <div class="footer__links-group">
+            <h4>Navigation</h4>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/#trending">Trending</a></li>
+              <li><a href="/#featured">Categories</a></li>
+              <li><a href="/#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer__links-group">
+            <h4>Connect</h4>
+            <ul>
+              <li><a href="https://github.com/tasmiul" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+              <li><a href="https://linkedin.com/in/tasmiul" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+              <li><a href="mailto:tasmiulalamshopnil@gmail.com">Email</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copyright">© 2026 Quizora. All rights reserved.</p>
+        <div class="footer__built-with">
+          <span>Built with</span>
+          <span class="footer__tech">Django</span>
+          <span class="footer__tech">Vanilla JS</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/js/theme.js?v=1"></script>
+  <script>
+    (function () {
+      var trigger = document.getElementById('categories-trigger');
+      var menu = document.getElementById('categories-menu');
+      var dd = document.getElementById('categories-dropdown');
+      if (!trigger || !menu || !dd) return;
+      trigger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var closed = menu.classList.toggle('hidden');
+        trigger.classList.toggle('is-open', !closed);
+        trigger.setAttribute('aria-expanded', String(!closed));
+      });
+      document.addEventListener('click', function (e) {
+        if (!dd.contains(e.target) && !menu.classList.contains('hidden')) {
+          menu.classList.add('hidden');
+          trigger.classList.remove('is-open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
