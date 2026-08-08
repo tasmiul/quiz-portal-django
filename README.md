@@ -22,6 +22,8 @@ A modern, responsive quiz platform built with Django and vanilla JavaScript. Qui
 - [Development Notes](#development-notes)
 - [License](#license)
 
+---
+
 ## Features
 
 ### 🧠 Quiz Discovery
@@ -87,6 +89,8 @@ A modern, responsive quiz platform built with Django and vanilla JavaScript. Qui
 <!-- Screenshot slot: Screenshots/dark-mode.png -->
 ![Quizora dark mode](Screenshots/dark-mode.png)
 
+---
+
 ## Tech Stack
 
 | Layer | Technology |
@@ -98,6 +102,8 @@ A modern, responsive quiz platform built with Django and vanilla JavaScript. Qui
 | Fonts | Space Grotesk and Inter via Google Fonts |
 | API | Django JSON responses and browser Fetch API |
 | Admin | Django built-in admin |
+
+---
 
 ## Project Structure
 
@@ -129,6 +135,8 @@ Quiz Portal/
 ├── manage.py                           # Django management entry point
 └── README.md
 ```
+
+---
 
 ## Quick Start
 
@@ -183,6 +191,8 @@ python manage.py runserver
 
 Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in a browser. The admin panel is available at [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/).
 
+---
+
 ## Seed Quiz Data
 
 Use the smaller demo dataset for quick local testing:
@@ -206,6 +216,8 @@ python manage.py seed_quiz_bank --seed 42 --reset
 
 Run only one seed command unless you intentionally want both datasets in the same database.
 
+---
+
 ## Admin Panel
 
 1. Create a superuser with `python manage.py createsuperuser`.
@@ -217,6 +229,8 @@ Run only one seed command unless you intentionally want both datasets in the sam
 7. Use `is_published` to control whether a quiz appears publicly.
 
 The public quiz experience does not require visitor accounts. Quiz attempts are counted whenever a submitted quiz is processed.
+
+---
 
 ## API Reference
 
@@ -245,6 +259,8 @@ Example submission:
 
 The submission response includes the score, correct answer count, total questions, answered count, and a complete answer review.
 
+---
+
 ## Development Notes
 
 - The SQLite database file `db.sqlite3` is intentionally not required for a fresh checkout.
@@ -257,6 +273,8 @@ The submission response includes the score, correct answer count, total question
 python manage.py check
 python manage.py test
 ```
+
+---
 
 ## License
 
@@ -285,6 +303,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+---
 
 ## Acknowledgments
 
