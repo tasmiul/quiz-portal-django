@@ -62,7 +62,7 @@ A modern, responsive quiz platform built with Django and vanilla JavaScript. Qui
 <!-- Screenshot slot: Screenshots/quiz-results.png -->
 ![Quiz results and answer review](Screenshots/quiz-results.png)
 
-### 🛡️ Content Management
+### ⚙️ Content Management
 
 - Django admin interface for categories, quizzes, questions, and choices
 - Inline question management inside the quiz editor
