@@ -22,7 +22,7 @@ A modern, responsive quiz platform built with Django and vanilla JavaScript. Qui
 
 ## Features
 
-### Quiz Discovery
+### 🧠 Quiz Discovery
 
 - Homepage with trending quizzes ordered by play count
 - Featured quizzes grouped by category
