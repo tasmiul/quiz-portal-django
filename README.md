@@ -139,8 +139,8 @@ Quiz Portal/
 
 ```bash
 # Clone the repository
-git clone <your-repository-url>
-cd Quiz-Portal
+git clone https://github.com/tasmiul/quiz-portal-django.git
+cd quiz-portal-django
 
 # Create and activate a virtual environment
 python -m venv env
