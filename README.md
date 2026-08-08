@@ -107,24 +107,24 @@ Quiz Portal/
 │   ├── asgi.py                         # ASGI entry point
 │   └── wsgi.py                         # WSGI entry point
 ├── quizzes/                            # Quiz application
-│   ├── admin.py                         # Admin registrations and inline editors
-│   ├── models.py                        # Category, Quiz, Question, and Choice
-│   ├── urls.py                          # JSON API routes
-│   ├── views.py                         # HTML views and API endpoints
-│   └── management/commands/             # Data seeding commands
-│       ├── seed_quizzes.py              # Small demo dataset
-│       ├── seed_quiz_bank.py            # Large generated quiz bank
-│       └── quiz_bank_data.py             # Quiz bank source data
+│   ├── admin.py                        # Admin registrations and inline editors
+│   ├── models.py                       # Category, Quiz, Question, and Choice
+│   ├── urls.py                         # JSON API routes
+│   ├── views.py                        # HTML views and API endpoints
+│   └── management/commands/            # Data seeding commands
+│       ├── seed_quizzes.py             # Small demo dataset
+│       ├── seed_quiz_bank.py           # Large generated quiz bank
+│       └── quiz_bank_data.py           # Quiz bank source data
 ├── templates/
-│   ├── index.html                        # Single-page quiz interface
-│   └── category.html                     # Category listing page
+│   ├── index.html                      # Single-page quiz interface
+│   └── category.html                   # Category listing page
 ├── static/
-│   ├── css/styles.css                    # Application styles and themes
-│   └── js/                               # Frontend behavior
-│       ├── app.js                        # API calls and quiz interactions
-│       └── theme.js                      # Theme persistence and toggle
-├── requirements.txt                      # Python dependencies
-├── manage.py                             # Django management entry point
+│   ├── css/styles.css                  # Application styles and themes
+│   └── js/                             # Frontend behavior
+│       ├── app.js                      # API calls and quiz interactions
+│       └── theme.js                    # Theme persistence and toggle
+├── requirements.txt                    # Python dependencies
+├── manage.py                           # Django management entry point
 └── README.md
 ```
 
@@ -263,7 +263,7 @@ This project is licensed under the MIT License.
 ```text
 MIT License
 
-Copyright (c) 2026 Tasmiul Alam Shopnil
+Copyright (c) 2026 Tasmiul Alam Shopnil 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
