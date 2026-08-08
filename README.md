@@ -8,6 +8,8 @@ A modern, responsive quiz platform built with Django and vanilla JavaScript. Qui
 <!-- Add the main application screenshot here. Suggested file: Screenshots/homepage.png -->
 ![Quizora home page](Screenshots/homepage.png)
 
+---
+
 ## Table of Contents
 
 - [Features](#features)
