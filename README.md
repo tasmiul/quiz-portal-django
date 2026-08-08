@@ -34,7 +34,7 @@ A modern, responsive quiz platform built with Django and vanilla JavaScript. Qui
 <!-- Screenshot slot: Screenshots/homepage.png -->
 ![Quizora homepage](Screenshots/homepage.png)
 
-### Timed Quiz Experience
+### ⏳ Timed Quiz Experience
 
 - Quiz introduction screen with description and rules
 - Configurable duration for each quiz
@@ -50,7 +50,7 @@ A modern, responsive quiz platform built with Django and vanilla JavaScript. Qui
 <!-- Screenshot slot: Screenshots/quiz-play.png -->
 ![Quiz play screen](Screenshots/quiz-play.png)
 
-### Results and Review
+### 📊 Results and Review
 
 - Percentage score with animated score ring
 - Correct, wrong, total, and elapsed-time statistics
@@ -62,7 +62,7 @@ A modern, responsive quiz platform built with Django and vanilla JavaScript. Qui
 <!-- Screenshot slot: Screenshots/quiz-results.png -->
 ![Quiz results and answer review](Screenshots/quiz-results.png)
 
-### Content Management
+### 🛡️ Content Management
 
 - Django admin interface for categories, quizzes, questions, and choices
 - Inline question management inside the quiz editor
@@ -74,7 +74,7 @@ A modern, responsive quiz platform built with Django and vanilla JavaScript. Qui
 <!-- Screenshot slot: Screenshots/admin-panel.png -->
 ![Django admin panel](Screenshots/admin-panel.png)
 
-### UI and Accessibility Details
+### 🎨 UI and Accessibility Details
 
 - Responsive layout for desktop and mobile screens
 - Light and dark themes with browser local-storage persistence
